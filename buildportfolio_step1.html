@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rainbow Portfolio</title>
+  <style>
+    :root {
+      --slant: 60px;
+      --radius: 20px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, auto);
+      gap: 1.5rem;
+      align-items: center;
+      justify-items: center;
+      position: relative;
+      padding: 2rem;
+    }
+
+    .container {
+      width: 300px;
+      padding: 16px;
+      background: #111;
+      position: relative;
+      border-radius: var(--radius);
+      clip-path: path("M0 0 Lcalc(100% - var(--slant)) 0 Q100% 0 100% var(--radius) L100% calc(100% - var(--radius)) Q100% 100% calc(100% - var(--radius)) 100% Lvar(--slant) 100% L0 calc(100% - var(--slant)) Z");
+      z-index: 2;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .container::before,
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      padding: 1px;
+      z-index: -1;
+      border-radius: var(--radius);
+      background: linear-gradient(15deg, orange, yellow, green, cyan, lightblue, dodgerblue, cadetblue, teal, steelblue, royalblue, cornflowerblue, mediumblue, darkblue, navy, lightsteelblue, powderblue, paleturquoise, blue, indigo, violet, orange);
+      background-size: 100% 200%;
+      animation: gradientFlow 60s linear infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 0% 100%; }
+    }
+
+    h1 {
+      color: white;
+      margin: 0 0 0.5rem 0;
+      font-size: clamp(1.5rem, 6vw, 2rem);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    p {
+      color: #aaa;
+      font-size: clamp(0.9rem, 3.5vw, 1rem);
+      text-align: center;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      padding: 1rem;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.3s;
+      background: #1e1e1e;
+      width: 300px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .card h3 span,
+    .card p span {
+      display: inline-block;
+      color: white;
+      transition: color 0.3s ease-in-out, filter 0.3s ease-in-out;
+    }
+
+    .card h3 span:hover,
+    .card p span:hover {
+      background: linear-gradient(90deg, orange, yellow, green, cyan, blue, indigo, violet);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: blur(1px) brightness(1.4);
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      background-size: 300% 300%;
+      animation: rainbowCycle 60s linear infinite;
+    }
+
+    .card1 a {
+      background-image: linear-gradient(90deg, orange, yellow, green, cyan, lightblue, dodgerblue);
+    }
+    .card2 a {
+      background-image: linear-gradient(90deg, cyan, lightblue, dodgerblue, cadetblue, teal, steelblue);
+    }
+    .card3 a {
+      background-image: linear-gradient(90deg, cadetblue, teal, steelblue, royalblue, cornflowerblue, mediumblue);
+    }
+    .card4 a {
+      background-image: linear-gradient(90deg, royalblue, cornflowerblue, mediumblue, darkblue, navy, lightsteelblue);
+    }
+    .card5 a {
+      background-image: linear-gradient(90deg, darkblue, navy, lightsteelblue, powderblue, paleturquoise, blue);
+    }
+    .card6 a {
+      background-image: linear-gradient(90deg, powderblue, paleturquoise, blue, indigo, violet, orange);
+    }
+
+    @keyframes rainbowCycle {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .card1, .card2, .card3, .card4, .card5, .card6 {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+    .card1 { grid-column: 1; grid-row: 1; }
+    .card2 { grid-column: 1; grid-row: 2; }
+    .card3 { grid-column: 1; grid-row: 3; }
+    .card4 { grid-column: 3; grid-row: 1; }
+    .card5 { grid-column: 3; grid-row: 2; }
+    .card6 { grid-column: 3; grid-row: 3; }
+
+    @media (max-width: 768px) {
+      .layout {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+        gap: 1.5rem;
+        padding: 1rem;
+      }
+
+      .container {
+        grid-column: 1 / -1;
+        grid-row: 1;
+      }
+
+      .card1 { grid-column: 1; grid-row: 2; }
+      .card4 { grid-column: 2; grid-row: 2; }
+      .card2 { grid-column: 1; grid-row: 3; }
+      .card5 { grid-column: 2; grid-row: 3; }
+      .card3 { grid-column: 1; grid-row: 4; }
+      .card6 { grid-column: 2; grid-row: 4; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div class="card card1">
+      <h3><span>Project</span> <span>One</span></h3>
+      <p><span>Built</span> <span>with</span> <span>HTML,</span> <span>CSS,</span> <span>and</span> <span>JavaScript</span> <span>—</span> <span>focused</span> <span>on</span> <span>interactivity</span> <span>and</span> <span>animation.</span></p>
+      <a href="#">View Project</a>
+    </div>
+    <div class="card card2">
+      <h3><span>Project</span> <span>Two</span></h3>
+      <p><span>Responsive</span> <span>layout</span> <span>with</span> <span>custom</span> <span>components</span> <span>and</span> <span>dynamic</span> <span>themes.</span></p>
+      <a href="#">View Project</a>
+    </div>
+    <div class="card card3">
+      <h3><span>Project</span> <span>Three</span></h3>
+      <p><span>CSS</span> <span>animations</span> <span>and</span> <span>SVG</span> <span>graphics</span> <span>combined</span> <span>for</span> <span>fluid</span> <span>design</span> <span>visuals.</span></p>
+      <a href="#">View Project</a>
+    </div>
+
+    <div class="container">
+      <h1>Hello, I'm Kyle</h1>
+      <p>Designer. Developer. Dreamer.<br />Welcome to my portfolio.</p>
+    </div>
+
+    <div class="card card4">
+      <h3><span>Project</span> <span>Four</span></h3>
+      <p><span>Interactive</span> <span>forms</span> <span>and</span> <span>data</span> <span>handling</span> <span>using</span> <span>modern</span> <span>JS</span> <span>patterns.</span></p>
+      <a href="#">View Project</a>
+    </div>
+    <div class="card card5">
+      <h3><span>Project</span> <span>Five</span></h3>
+      <p><span>UX-first</span> <span>design</span> <span>with</span> <span>accessibility</span> <span>and</span> <span>performance</span> <span>in</span> <span>mind.</span></p>
+      <a href="#">View Project</a>
+    </div>
+    <div class="card card6">
+      <h3><span>Project</span> <span>Six</span></h3>
+      <p><span>Web</span> <span>app</span> <span>with</span> <span>full-stack</span> <span>integration</span> <span>and</span> <span>live</span> <span>preview</span> <span>features.</span></p>
+      <a href="#">View Project</a>
+    </div>
+  </div>
+</body>
+</html>
