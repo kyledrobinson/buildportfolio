@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rainbow Portfolio</title>
+  <style>
+    :root {
+      --slant: 60px;
+      --radius: 20px;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      padding: clamp(1rem, 5vw, 2rem);
+      background: #111;
+      position: relative;
+      border-radius: var(--radius);
+      clip-path: path(
+        "M0 0 Lcalc(100% - var(--slant)) 0 Q100% 0 100% var(--radius) L100% calc(100% - var(--radius)) Q100% 100% calc(100% - var(--radius)) 100% Lvar(--slant) 100% L0 calc(100% - var(--slant)) Z"
+      );
+      z-index: 1;
+      margin: 1rem;
+      box-sizing: border-box;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      padding: 1px;
+      z-index: -1;
+      border-radius: var(--radius);
+      background: linear-gradient(15deg, 
+        orange, yellow, green, cyan, lightblue, dodgerblue, cadetblue, teal, 
+        steelblue, royalblue, cornflowerblue, mediumblue, darkblue, navy, 
+        lightsteelblue, powderblue, paleturquoise, blue, indigo, 
+        violet, orange);
+      background-size: 100% 200%;
+      animation: gradientFlow 60s linear infinite;
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 0% 100%; }
+    }
+
+    h1 {
+      color: white;
+      margin: 0 0 0.5rem 0;
+      font-size: clamp(1.5rem, 6vw, 2rem);
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    p {
+      color: #aaa;
+      font-size: clamp(0.9rem, 3.5vw, 1rem);
+      text-align: center;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --radius: 12px;
+        --slant: 40px;
+      }
+      
+      .container {
+        width: calc(100% - 2rem);
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hello, I'm Kyle</h1>
+    <p>Designer. Developer. Dreamer.<br />Welcome to my portfolio.</p>
+  </div>
+</body>
+</html>
